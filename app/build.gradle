@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.palvision.passportandcreditcardreader"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // card io
+
+//add the anyline sdk as dependency (maybe adapt version name)
+
+    // Vision API used for simultaneous barcode scanning
+
+    //include AnylineSDK from maven
+
+    //include AnylineSDK from locale libs folder
+    //compile(name:'anylinesdk-3.16.0', ext:'aar')
+    compile 'io.anyline:anylinesdk:3.16.0@aar'
+    compile 'io.anyline:anylinesdk:3.16.0@aar'
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'io.card:android-sdk:5.4.0'
+    compile 'com.google.android.gms:play-services-vision:10.0.0'
+    testCompile 'junit:junit:4.12'
+}
+
+//root section of the file
+repositories {
+    //add the anyline maven repo
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url 'https://anylinesdk.blob.core.windows.net/maven/' }
+}
